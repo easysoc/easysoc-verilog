@@ -1,0 +1,25 @@
+<idea-plugin allow-bundled-update="true" url="https://www.easysoc.org">
+    <id>org.easysoc.verilog</id>
+    <name>EasySoC Verilog</name>
+    <vendor url="https://www.easysoc.org">EasySoC</vendor>
+
+    <description><![CDATA[
+    Jump to the corresponding Chisel code by navigate(Ctrl+Click) the special verilog comment.<br>
+    Currently depends on the SystemVerilog plugin by Edaphic.Studio.
+    ]]></description>
+
+    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
+         on how to target different products -->
+    <depends>studio.edaphic.sv</depends>
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+        <psi.referenceContributor language="SystemVerilog" implementation="org.easysoc.plugins.verilog.resolve.reference.VerilogReferenceContributor"/>
+        <documentationProvider implementation="org.easysoc.plugins.verilog.paths.FileInfoRefDocumentationProvider"/>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
+</idea-plugin>

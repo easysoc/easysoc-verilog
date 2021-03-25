@@ -1,8 +1,12 @@
-<idea-plugin allow-bundled-update="true" url="https://www.easysoc.org">
+<idea-plugin url="https://www.easysoc.org">
     <id>org.easysoc.verilog</id>
     <name>EasySoC Verilog</name>
     <vendor url="https://www.easysoc.org">EasySoC</vendor>
-
+    <change-notes><![CDATA[
+        <ul>
+            <li>Allow to select the Scala/Chisel file to jump to</li>
+        </ul>
+    ]]></change-notes>
     <description><![CDATA[
     Jump to the corresponding Chisel code by navigate(Ctrl+Click) the special verilog comment.<br>
     Currently depends on the SystemVerilog plugin by Edaphic.Studio.

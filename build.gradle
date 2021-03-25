@@ -28,7 +28,7 @@ intellij {
 
 runIde {
     // https://confluence.jetbrains.com/display/JBR/JetBrains+Runtime
-    jbrVersion "11_0_9b1145.21"
+    jbrVersion "11_0_9_1b1145.77"
     ideDirectory "/home/itviewer/Downloads/software/chip"
     jvmArgs '-Didea.platform.prefix=Chip'
     //for jbr11
@@ -37,9 +37,7 @@ runIde {
 
 patchPluginXml {
     sinceBuild "203"
-    untilBuild "203.*"
-    changeNotes """
-      First release.<br>"""
+    untilBuild "211.*"
 }
 
 buildSearchableOptions.onlyIf { false }

@@ -36,6 +36,12 @@ public class FileInfoRef extends PsiReferenceBase<PsiElement> {
   }
 
   public class MyFakePsiElement extends FakePsiElement implements SyntheticElement {
+
+    @Override
+    public String getPresentableText() {
+      return "FileInfo";
+    }
+
     @Override
     public PsiElement getParent() {
       return myElement;
@@ -44,11 +50,19 @@ public class FileInfoRef extends PsiReferenceBase<PsiElement> {
     @Override
     public void navigate(boolean requestFocus) {
 
+      // only support first item // @[GCD.scala 24:{19,20} GCD2.scala 28:7]
       String[] token = myElement.getText().split(" ");
-      String filename = token[1].substring(2);
-      String[] pos = token[2].split(":");
-      int line = Integer.valueOf(pos[0]) - 1;
-      int column = Integer.valueOf(pos[1].replace("]", "")) - 1;
+      // 只有这里和 Firrtl 不同，Verilog 具有 // 前缀
+      String filename = token[1].substring(2);	// GCD.scala
+      String[] pos = token[2].split(":");	//
+      int line = Integer.parseInt(pos[0]) - 1;
+      int column;
+      if (pos[1].startsWith("{")) {
+        String[] columns = pos[1].split(",");
+        column = Integer.parseInt(columns[0].replace("{", "")) - 1;
+      } else {
+        column = Integer.parseInt(pos[1].replace("]", "")) - 1;
+      }
 
       Project project = myElement.getProject();
       PsiFile[] files = FilenameIndex.getFilesByName(project,filename, GlobalSearchScope.projectScope(project));
@@ -72,9 +86,11 @@ public class FileInfoRef extends PsiReferenceBase<PsiElement> {
                   .createPopup().showInFocusCenter();
         }
       } else {
-        Notifications.Bus.notify(new Notification("FileInfo","",filename + " not found!",
-                NotificationType.ERROR));
+        Notifications.Bus.notify(new Notification(
+                "SystemVerilog","",filename + " not found!", NotificationType.ERROR));
       }
     }
+
+
   }
 }

@@ -1,43 +1,42 @@
 plugins {
     id 'java'
-    id 'org.jetbrains.intellij' version '0.6.5'
+    id 'org.jetbrains.intellij' version '1.5.1'
 }
 
 group 'org.easysoc'
 version pluginVersion
 
-//sourceCompatibility = 1.8
+sourceCompatibility = 11
+targetCompatibility = 11
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    //testCompile group: 'junit', name: 'junit', version: '4.12'
+
 }
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
 intellij {
     // version and localPath should not be specified at the same time
-    localPath "/home/itviewer/Downloads/software/chip"
+    // version = '2021.3.3'
+    localPath = "/home/itviewer/Downloads/software/idea-IC"
+    sandboxDir = "/home/itviewer/IdeaProjects/plugins-sandbox"
 
-    // https://blog.jetbrains.com/platform/2019/06/java-functionality-extracted-as-a-plugin/
-    // plugins 'studio.edaphic.sv:2019.3.2'
-    downloadSources false
+    // plugins = ['PsiViewer:213-SNAPSHOT']
+    // downloadSources false
 }
 
 runIde {
-    // https://confluence.jetbrains.com/display/JBR/JetBrains+Runtime
-    jbrVersion "11_0_9_1b1145.77"
-    ideDirectory "/home/itviewer/Downloads/software/chip"
-    jvmArgs '-Didea.platform.prefix=Chip'
+    ideDir = project.file('/home/itviewer/Downloads/software/idea-IC')
     //for jbr11
     jvmArgs '--add-exports=java.base/jdk.internal.vm=ALL-UNNAMED','-Djdk.module.illegalAccess.silent=true'
 }
 
 patchPluginXml {
-    sinceBuild "203"
-    untilBuild "211.*"
+    sinceBuild = '213'
+    untilBuild = '221.*'
 }
 
 buildSearchableOptions.onlyIf { false }

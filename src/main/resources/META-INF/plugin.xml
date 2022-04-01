@@ -4,23 +4,23 @@
     <vendor url="https://www.easysoc.org">EasySoC</vendor>
     <change-notes><![CDATA[
         <ul>
-            <li>Allow to select the Scala/Chisel file to jump to</li>
+            <li>Support IntelliJ 2021.3</li>
         </ul>
     ]]></change-notes>
     <description><![CDATA[
-    Jump to the corresponding Chisel code by navigate(Ctrl+Click) the special verilog comment.<br>
+    Jump to the corresponding Chisel code by Ctrl+Click on the special verilog comment.<br>
     Currently depends on the SystemVerilog plugin by Edaphic.Studio.
     ]]></description>
 
-    <!-- please see http://www.jetbrains.org/intellij/sdk/docs/basics/getting_started/plugin_compatibility.html
-         on how to target different products -->
     <depends>studio.edaphic.sv</depends>
+    <depends>org.easysoc.chisel</depends>
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <!-- Add your extensions here -->
+        <notificationGroup id="SystemVerilog" displayType="BALLOON"/>
+
         <psi.referenceContributor language="SystemVerilog" implementation="org.easysoc.plugins.verilog.resolve.reference.VerilogReferenceContributor"/>
-        <documentationProvider implementation="org.easysoc.plugins.verilog.paths.FileInfoRefDocumentationProvider"/>
+        <lang.documentationProvider language="SystemVerilog" implementationClass="org.easysoc.plugins.verilog.paths.FileInfoRefDocumentationProvider"/>
     </extensions>
 
     <actions>
